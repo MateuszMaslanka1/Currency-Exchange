@@ -1,0 +1,15 @@
+<section>
+      <div [className]="'find-currency-container'">
+        <mat-form-field class="example-full-width">
+          <mat-label>Waluta</mat-label>
+          <input matInput placeholder="Wpisz walutę" #searchInput [(ngModel)]="textFormInput">
+        </mat-form-field>
+      </div>
+      <mat-dialog-content>
+          <div [className]="'currency'" *ngFor="let elem of this.dataToView | keyvalue">
+            <button mat-stroked-button color="basic" (click)="getValue(elem)">
+              <span [className]="'currency-code'">{{elem.key}}</span>
+            </button>
+          </div>
+      </mat-dialog-content>
+</section>

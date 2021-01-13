@@ -1,0 +1,16 @@
+<section>
+  <div [className]="'currency-container'">
+    <button mat-raised-button (click)="currencyTypeDialog(true)">{{this.chooseCurrency.key}}</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Mam</mat-label>
+      <input [type]="'number'" matInput [(ngModel)]="this.chooseValue" (keyup)="getInputValue(true, $event)">
+    </mat-form-field>
+  </div>
+  <div  [className]="'currency-container'">
+    <button mat-raised-button (click)="currencyTypeDialog(false)">{{this.chooseToCalculate.key}}</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Chcę</mat-label>
+      <input [type]="'number'" matInput [(ngModel)]="this.valueToCalculate" (keyup)="getInputValue(false, $event)">
+    </mat-form-field>
+  </div>
+</section>

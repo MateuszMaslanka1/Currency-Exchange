@@ -1,0 +1,26 @@
+<section>
+  <div [className]='"rates-container"'>
+    <p [className]='"title-box"'>
+      <mat-toolbar>
+        <span>Kursy walut</span>
+        <span class="material-icons">account_balance</span>
+      </mat-toolbar>
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>Wybierz walutę</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let item of this.countryCodeTab | keyvalue" [value]="item.key" (click)="getRates(item)">
+          {{item.key}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div [className]='"choose-rates"'>
+        <div [className]='"name-currency"'>
+          <span>{{this.chooseRates.key}}</span>
+          <span class="material-icons">trending_flat</span>
+          <span>PLN</span>
+        </div>
+        <p><span>Kurs:</span> {{this.chooseRates.value}}</p>
+    </div>
+  </div>
+</section>

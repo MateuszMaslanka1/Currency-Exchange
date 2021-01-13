@@ -1,0 +1,21 @@
+@import '../../sheardStyle/sizeOfElements.scss';
+@import '../../sheardStyle/marginForSection.scss';
+@import '../../sheardStyle/color.scss';
+
+section {
+  border-bottom: 2px solid grey;
+  .currency-container {
+      padding: 0 $nameLogoSize 0 $nameLogoSize;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $marginSection;
+      button {
+        height: $buttonSize;
+        background-color: $logoColor;
+      }
+    ::ng-deep .mat-form-field-wrapper {
+      padding: 0;
+    }
+  }
+}

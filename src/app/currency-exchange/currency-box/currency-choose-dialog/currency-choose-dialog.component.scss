@@ -1,0 +1,17 @@
+@import '../../../sheardStyle/sizeOfElements.scss';
+
+section {
+  .find-currency-container {
+      .mat-form-field {
+        width: 100%;
+      }
+  }
+    .currency {
+      padding:  $paddingDialogElements  $paddingDialogElements 0 0;
+      .choose-currency {
+        .currency-code {
+          display: block;
+        }
+      }
+    }
+}
