@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {interval, Observable} from 'rxjs';
+import {interval, Observable, of, Subject} from 'rxjs';
 import {Curriencies} from '../Model/currencies';
-import {concatMap, map, switchMap, tap} from 'rxjs/operators';
+import {concatMap, every, map, switchMap, take, tap} from 'rxjs/operators';
 import {GetCurrencyService} from '../Services/get-currency.service';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-rates',
@@ -15,7 +16,10 @@ export class RatesComponent implements OnInit {
   @Input() events: Observable<Curriencies>;
   countryCodeTab: {[k: string]: number};
   chooseRates = {key: 'EUR', value: 0};
-  sourceInterval = interval(1000);
+  private sourceInterval = interval(1000);
+  getNewCurrency = true;
+  countSecond = 0;
+  startInterval;
 
   ngOnInit() {
     this.events.pipe(
@@ -30,20 +34,32 @@ export class RatesComponent implements OnInit {
   }
 
   getRates(currency: {key: string, value: number}) {
-    this.getCurrencyService.currenciesToCalculate(currency.key).pipe(
-      map((el: Curriencies) => {
-          return el.rates;
-        }
-      ),
-      switchMap(el => this.startTimer())
+     if (this.getNewCurrency === false) {
+       this.startNewTime();
+     }
+     this.startInterval = this.sourceInterval.pipe(
+      tap(() => this.countSecond++),
+      concatMap(() => ((this.countSecond === 60 || this.getNewCurrency === true) ? this.getData(currency.key) : of(null))),
     ).subscribe((rate) => {
-      this.chooseRates = {key: currency.key, value: rate.PLN};
+      if (isNotNullOrUndefined(rate)) {
+        this.chooseRates = {key: currency.key, value: rate.PLN};
+      }
     });
   }
 
-  startTimer() {
-    return interval(1000).pipe(
-      tap(el => console.log(el))
+  getData(currencyCode: string) {
+    this.getNewCurrency = false;
+    this.countSecond = 0;
+    return this.getCurrencyService.currenciesToCalculate(currencyCode).pipe(
+      map((el: Curriencies) => {
+          return el.rates;
+        }
+      )
     );
+  }
+
+  startNewTime() {
+    this.getNewCurrency = true;
+    this.startInterval.unsubscribe();
   }
 }
