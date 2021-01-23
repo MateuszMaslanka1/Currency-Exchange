@@ -12,7 +12,8 @@ export class CheckingThePriceComponent implements OnInit {
 
   constructor(private getCurrencyService: GetCurrencyService) { }
 
-  getRates;
+  getRates = {};
+  updateTime: number;
 
   ngOnInit() {
     (Object.keys(this.getCurrencyService.getCourses()).length === 0) ? this.getRatesFormApi().subscribe(el => this.getRates = el)
@@ -25,5 +26,4 @@ export class CheckingThePriceComponent implements OnInit {
         return el.rates;
     }));
   }
-
 }

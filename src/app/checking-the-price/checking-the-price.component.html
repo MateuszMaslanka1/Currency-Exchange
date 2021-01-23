@@ -1,0 +1,17 @@
+<section>
+      <div [className]="'update-container'">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Wpisz czas do aktualizacji</mat-label>
+          <input [type]="'number'" matInput placeholder="Ex. 50" [(ngModel)]="this.updateTime">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Wybierz walutę</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of this.getRates | keyvalue" [value]="item.key" (click)="getRates(item)">
+              {{item.key}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-stroked-button color="warn">Start</button>
+      </div>
+</section>

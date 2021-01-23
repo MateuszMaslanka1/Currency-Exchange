@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MobileMenuComponent } from './page-header/mobile-menu/mobile-menu.component';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyExchangeComponent } from './currency-exchange/currency-exchange.component';
@@ -13,7 +14,7 @@ import { CurrencyChooseDialogComponent } from './currency-exchange/currency-box/
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { RatesComponent } from './currency-exchange/rates/rates.component';
-import { MobileMenuComponent } from './page-header/mobile-menu/mobile-menu.component';
+import { CheckingThePriceComponent } from './checking-the-price/checking-the-price.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MobileMenuComponent } from './page-header/mobile-menu/mobile-menu.compo
     CurrencyBoxComponent,
     CurrencyChooseDialogComponent,
     RatesComponent,
-    MobileMenuComponent,
+    CheckingThePriceComponent,
+    MobileMenuComponent
   ],
     imports: [
         BrowserModule,
