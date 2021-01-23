@@ -39,6 +39,7 @@ export class CurrencyBoxComponent implements OnInit {
         return el.rates;
       })
     ).subscribe((el: {[k: string]: number} = {}) => {
+      this.getCurrencyService.setCourses(el);
       this.countryCode = el;
       this.chooseToCalculate.value = el.PLN;
     });

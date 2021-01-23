@@ -13,6 +13,7 @@ import { CurrencyChooseDialogComponent } from './currency-exchange/currency-box/
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { RatesComponent } from './currency-exchange/rates/rates.component';
+import { CheckingThePriceComponent } from './checking-the-price/checking-the-price.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RatesComponent } from './currency-exchange/rates/rates.component';
     CurrencyBoxComponent,
     CurrencyChooseDialogComponent,
     RatesComponent,
+    CheckingThePriceComponent,
   ],
     imports: [
         BrowserModule,
