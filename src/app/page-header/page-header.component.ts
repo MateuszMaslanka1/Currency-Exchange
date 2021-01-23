@@ -9,7 +9,12 @@ export class PageHeaderComponent implements OnInit {
 
   constructor() { }
 
+  isVisible = false;
+
   ngOnInit() {
   }
 
+  showMobileMenu(isVisible) {
+    this.isVisible = isVisible;
+  }
 }

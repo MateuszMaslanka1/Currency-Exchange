@@ -27,6 +27,14 @@ section {
       mat-form-field {
         width: $widthElments;
       }
+    .live-container {
+      width: 100%;
+      font-size: 1.5rem;
+      padding-bottom: .75em;
+        span {
+          color: #ef0f0f;
+        }
+    }
     .choose-rates {
       background-color: $logoColor;
       border-radius: $borderRadius;

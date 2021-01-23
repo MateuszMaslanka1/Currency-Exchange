@@ -18,7 +18,7 @@ export class RatesComponent implements OnInit {
   chooseRates = {key: 'EUR', value: 0};
   private sourceInterval = interval(1000);
   getNewCurrency = true;
-  countSecond = 0;
+  countSecond = 60;
   startInterval;
 
   ngOnInit() {
@@ -38,8 +38,8 @@ export class RatesComponent implements OnInit {
        this.startNewTime();
      }
      this.startInterval = this.sourceInterval.pipe(
-      tap(() => this.countSecond++),
-      concatMap(() => ((this.countSecond === 60 || this.getNewCurrency === true) ? this.getData(currency.key) : of(null))),
+      tap(() => this.countSecond--),
+      concatMap(() => ((this.countSecond === 0 || this.getNewCurrency === true) ? this.getData(currency.key) : of(null))),
     ).subscribe((rate) => {
       if (isNotNullOrUndefined(rate)) {
         this.chooseRates = {key: currency.key, value: rate.PLN};
@@ -49,7 +49,7 @@ export class RatesComponent implements OnInit {
 
   getData(currencyCode: string) {
     this.getNewCurrency = false;
-    this.countSecond = 0;
+    this.countSecond = 60;
     return this.getCurrencyService.currenciesToCalculate(currencyCode).pipe(
       map((el: Curriencies) => {
           return el.rates;

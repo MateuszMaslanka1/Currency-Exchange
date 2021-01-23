@@ -5,7 +5,8 @@
     </div>
     <div [className]="'menu-button-container'">
       <h1>Wymiana walut</h1>
-      <button mat-raised-button color="basic">Menu</button>
+      <button mat-raised-button color="basic" (click)="showMobileMenu(true)">Menu</button>
     </div>
   </section>
+  <app-mobile-menu *ngIf="isVisible"></app-mobile-menu>
 </header>

@@ -6,6 +6,7 @@
         <span class="material-icons">account_balance</span>
       </mat-toolbar>
     </p>
+    <div [className]='"live-container"'><span>Live Aktualizacja: </span>{{this.countSecond}}s</div>
     <mat-form-field appearance="outline">
       <mat-label>Wybierz walutę</mat-label>
       <mat-select>
@@ -14,7 +15,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div>Live Aktualizacja: {{this.countSecond}}</div>
     <div [className]='"choose-rates"'>
         <div [className]='"name-currency"'>
           <span>{{this.chooseRates.key}}</span>
