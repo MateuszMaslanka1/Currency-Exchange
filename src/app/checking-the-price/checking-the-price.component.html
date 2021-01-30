@@ -4,14 +4,18 @@
           <mat-label>Wpisz czas do aktualizacji</mat-label>
           <input [type]="'number'" matInput placeholder="Ex. 50" [(ngModel)]="this.updateTime">
         </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Wpisz kwotę zakupu</mat-label>
+          <input [type]="'number'" matInput placeholder="Ex. 4.50" [(ngModel)]="this.getPrice">
+        </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Wybierz walutę</mat-label>
           <mat-select>
-            <mat-option *ngFor="let item of this.getRates | keyvalue" [value]="item.key" (click)="getRates(item)">
+            <mat-option *ngFor="let item of this.getRates | keyvalue" [value]="item.key" (click)="getCurrencyValue(item)">
               {{item.key}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-stroked-button color="warn">Start</button>
+        <button mat-stroked-button color="warn" (click)="getRateToCheck()">Start</button>
       </div>
 </section>

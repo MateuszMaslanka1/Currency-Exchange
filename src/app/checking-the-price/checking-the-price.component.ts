@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GetCurrencyService} from '../currency-exchange/Services/get-currency.service';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {Curriencies} from '../currency-exchange/Model/currencies';
+import {interval} from 'rxjs';
 
 @Component({
   selector: 'app-checking-the-price',
@@ -14,6 +15,8 @@ export class CheckingThePriceComponent implements OnInit {
 
   getRates = {};
   updateTime: number;
+  getPrice: number;
+  getCurrency: object;
 
   ngOnInit() {
     (Object.keys(this.getCurrencyService.getCourses()).length === 0) ? this.getRatesFormApi().subscribe(el => this.getRates = el)
@@ -25,5 +28,19 @@ export class CheckingThePriceComponent implements OnInit {
       map((el: Curriencies) => {
         return el.rates;
     }));
+  }
+
+  getCurrencyValue(currency) {
+    this.getCurrency = currency;
+  }
+
+  getRateToCheck() {
+    console.log(this.updateTime, this.getCurrency, this.getPrice);
+    this.startTimer(this.updateTime);
+  }
+
+  startTimer(updateTime: number) {
+    interval(updateTime).pipe(
+    ).subscribe(el => console.log(this.getRates));
   }
 }
