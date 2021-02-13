@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {interval, Observable, of, Subject} from 'rxjs';
+import {interval, Observable, of} from 'rxjs';
 import {Curriencies} from '../Model/currencies';
-import {concatMap, every, map, switchMap, take, tap} from 'rxjs/operators';
+import {concatMap, map, tap} from 'rxjs/operators';
 import {GetCurrencyService} from '../Services/get-currency.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
