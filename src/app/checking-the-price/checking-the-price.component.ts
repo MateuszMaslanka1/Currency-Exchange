@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {GetCurrencyService} from '../currency-exchange/Services/get-currency.service';
-import {first, map, mergeMap, pluck, skipWhile, switchMap, takeWhile, tap} from 'rxjs/operators';
+import {first, map, mergeMap, pluck, skipWhile, switchMap, take, takeWhile, tap} from 'rxjs/operators';
 import {Curriencies} from '../currency-exchange/Model/currencies';
-import {fromEvent, interval, Observable} from 'rxjs';
+import {fromEvent, interval, Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-checking-the-price',
@@ -14,26 +14,16 @@ export class CheckingThePriceComponent implements AfterViewInit {
   constructor(private getCurrencyService: GetCurrencyService) { }
 
   getRates: {[k: string]: number} = {};
-  updateTime = 0.1;
+  updateTime = 1;
   getPrice: number;
   getCurrency: string;
-  getValueOfMin: number;
-  interval: Observable<number>;
+  isStart = false;
+  interval: Subscription;
   @ViewChild('start', { static: true }) startButton: ElementRef;
 
   ngAfterViewInit() {
     (Object.keys(this.getCurrencyService.getCourses()).length === 0) ? this.getRatesFormApi('PLN').subscribe(el => this.getRates = el)
     : this.getRates = this.getCurrencyService.getCourses();
-
-    fromEvent<any>(this.startButton.nativeElement, 'click').pipe(
-      skipWhile(() => (this.updateTime * 60) * 1000 < 1000),
-      switchMap(() => this.startTimer((this.updateTime * 60) * 1000)),
-      pluck('PLN'),
-      takeWhile(el => el <= this.getPrice),
-      first()
-    ).subscribe( el =>
-      console.log(el)
-    );
   }
 
   getRatesFormApi(getCurrencies) {
@@ -47,9 +37,20 @@ export class CheckingThePriceComponent implements AfterViewInit {
     this.getCurrency = currency.key;
   }
 
-  startTimer(updateTime) {
-    return interval(updateTime).pipe(
-      mergeMap(() => this.getRatesFormApi(this.getCurrency))
-    );
+  newTimer() {
+    const time: number = (this.updateTime * 60) * 1000;
+    if (this.isStart) {
+      console.log('jest');
+      this.interval.unsubscribe();
+    }
+    if (this.updateTime >= 1 && this.updateTime < 30) {
+      this.isStart = true;
+      this.interval = interval(time).pipe(
+        tap(() => this.isStart = true),
+        mergeMap(() => this.getRatesFormApi(this.getCurrency)),
+        pluck('PLN'),
+        takeWhile(el => el <= this.getPrice, true)
+      ).subscribe(el => console.log(el));
+    }
   }
 }
