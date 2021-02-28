@@ -1,5 +1,9 @@
 <main>
+  <div [className]="'curriencies-buy-box'">
+    <button mat-raised-button>
+      <a [className]="'go-to-buy-currencies'" [routerLink]="'/checkingThePrice'">Kupowanie walut</a>
+    </button>
+  </div>
   <app-currency-box [events]="$currenciesSubject.asObservable()"></app-currency-box>
   <app-rates [events]="$currenciesSubject.asObservable()"></app-rates>
-  <a [routerLink]="'/checkingThePrice'">sd</a>
 </main>

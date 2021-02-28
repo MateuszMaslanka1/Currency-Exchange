@@ -2,4 +2,19 @@
 
 main {
   margin-top: $marginSection;
+  .curriencies-buy-box {
+    width: 100%;
+    margin-bottom: 1rem;
+    button {
+      display: block;
+      margin: 0 auto;
+      height: 3rem;
+      background-color: #186fcb;
+      .go-to-buy-currencies {
+        text-decoration: none;
+        color: white;
+        text-transform: uppercase;
+      }
+    }
+  }
 }

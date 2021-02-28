@@ -2,8 +2,14 @@
 @import '../../sheardStyle/marginForSection.scss';
 @import '../../sheardStyle/color.scss';
 
+
 section {
   border-bottom: 2px solid grey;
+  p {
+    padding: 0 $nameLogoSize 0 $nameLogoSize;
+    font-size: 20px;
+    margin-bottom: .5rem;
+  }
   .currency-container {
       padding: 0 $nameLogoSize 0 $nameLogoSize;
       display: flex;
@@ -11,11 +17,19 @@ section {
       align-items: center;
       margin-bottom: $marginSection;
       button {
+        border-radius: 5px  0 0 5px;
         height: $buttonSize;
         background-color: $logoColor;
       }
-    ::ng-deep .mat-form-field-wrapper {
-      padding: 0;
-    }
+      input {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid lightgrey;
+        height: 4rem;
+        border-radius: 0 5px 5px 0;
+      }
+      ::ng-deep .mat-form-field-wrapper {
+        padding: 0;
+      }
   }
 }
