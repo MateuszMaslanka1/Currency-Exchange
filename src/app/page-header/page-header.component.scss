@@ -2,6 +2,10 @@
 @import '../sheardStyle/sizeOfElements.scss';
 
 header {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;
   section {
     display: flex;
     padding: 0 $nameLogoSize 0 $nameLogoSize;

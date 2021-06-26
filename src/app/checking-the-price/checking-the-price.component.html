@@ -16,6 +16,10 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button #start (click)="newTimer()">Start</button>
+        <button mat-raised-button (click)="newTimer()">Start</button>
+        <div [className]="'purchase-amount-box'" *ngIf="purchaseAmount !== 0">
+          <p>Waluta kupiona za</p>
+          <p>{{this.purchaseAmount | number : '1.2-2'}} zł</p>
+        </div>
       </div>
 </section>
